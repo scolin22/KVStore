@@ -2,7 +2,7 @@ Colin Stone 31645112
 
 Port: 45112
 
-Run: java -jar -Xmx64m KVStore.jar 45112
+Run: java -Xmx64m -classpath KVStore.jar com.scolin22.cpen431.A3.Main 45112
 
 206.12.16.154:45112
 142.103.2.2:45112
