@@ -169,7 +169,9 @@ public class Request {
         INVALID_REP_CODE((byte) 0x07), // Undefined
         MISSING_LEN((byte) 0x20),
         INCOMPLETE_REQ((byte) 0x21),
-        INCOMPLETE_VAL((byte) 0x22);
+        INCOMPLETE_VAL((byte) 0x22),
+        DELETE_FAIL((byte) 0x23);
+
 
         private byte index;
 
