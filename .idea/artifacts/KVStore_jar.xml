@@ -3,6 +3,8 @@
     <output-path>$PROJECT_DIR$/out/artifacts/KVStore_jar</output-path>
     <root id="archive" name="KVStore.jar">
       <element id="module-output" name="KVStore" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/com/scolin22/cpen431/libs/guava-19.0.jar" path-in-jar="/" />
+      <element id="library" level="project" name="guava-19.0" />
     </root>
   </artifact>
 </component>
