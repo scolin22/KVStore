@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="KVStore:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/KVStore_jar</output-path>
+    <root id="archive" name="KVStore.jar">
+      <element id="module-output" name="KVStore" />
+    </root>
+  </artifact>
+</component>
