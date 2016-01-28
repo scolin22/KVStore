@@ -34,9 +34,10 @@ public class DataStore {
     }
 
     public void put(Request r) {
-        try {
-            r.copyRequest(fetchCache(r));
-        } catch (Exception e) {
+        Request cachedRequest = cache.getIfPresent(r.getUID());
+        if (cachedRequest != null) {
+            r.copyRequest(cachedRequest);
+        } else {
             double heapFreeSize = Runtime.getRuntime().freeMemory();
             double heapMaxSize = Runtime.getRuntime().maxMemory();
 
@@ -52,9 +53,10 @@ public class DataStore {
     }
 
     public void get(Request r) {
-        try {
-            r.copyRequest(fetchCache(r));
-        } catch (Exception e) {
+        Request cachedRequest = cache.getIfPresent(r.getUID());
+        if (cachedRequest != null) {
+            r.copyRequest(cachedRequest);
+        } else {
             if (!ds.containsKey(r.getKey())) {
                 r.repType = Request.ReplyType.INVALID_KEY;
             } else {
@@ -68,9 +70,10 @@ public class DataStore {
     }
 
     public void remove(Request r) {
-        try {
-            r.copyRequest(fetchCache(r));
-        } catch (Exception e) {
+        Request cachedRequest = cache.getIfPresent(r.getUID());
+        if (cachedRequest != null) {
+            r.copyRequest(cachedRequest);
+        } else {
             if (!ds.containsKey(r.getKey())) {
                 r.repType = Request.ReplyType.INVALID_KEY;
             } else {
@@ -82,9 +85,10 @@ public class DataStore {
     }
 
     public void delete_all(Request r) {
-        try {
-            r.copyRequest(fetchCache(r));
-        } catch (Exception e) {
+        Request cachedRequest = cache.getIfPresent(r.getUID());
+        if (cachedRequest != null) {
+            r.copyRequest(cachedRequest);
+        } else {
             ds.clear();
             System.gc();
 
@@ -99,19 +103,5 @@ public class DataStore {
             }
             cache.put(r.getUID(), r);
         }
-    }
-
-    private Request fetchCache(Request r) throws Exception {
-        return cache.get(r.getUID(), new Callable<Request>() {
-            @Override
-            public Request call() throws Exception {
-                return null;
-            }
-        });
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
     }
 }
