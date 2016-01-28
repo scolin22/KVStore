@@ -82,17 +82,22 @@ public class DataStore {
     }
 
     public void delete_all(Request r) {
-        ds.clear();
-        System.gc();
+        try {
+            r.copyRequest(fetchCache(r));
+        } catch (Exception e) {
+            ds.clear();
+            System.gc();
 
-        double heapFreeSize = Runtime.getRuntime().freeMemory();
-        double heapMaxSize = Runtime.getRuntime().maxMemory();
-        if ((heapFreeSize / heapMaxSize) < 0.15 || ds.size() >= STORE_CAPACITY) {
-            log.warning("Garbage Collection didn't run, Heap, Free: " + heapFreeSize + " Max: " + heapMaxSize);
-            r.repType = Request.ReplyType.DELETE_FAIL;
-        } else {
-            log.warning("Cleared data store, Heap, Free: " + heapFreeSize + " Max: " + heapMaxSize);
-            r.repType = Request.ReplyType.OP_SUCCESS;
+            double heapFreeSize = Runtime.getRuntime().freeMemory();
+            double heapMaxSize = Runtime.getRuntime().maxMemory();
+            if ((heapFreeSize / heapMaxSize) < 0.15 || ds.size() >= STORE_CAPACITY) {
+                log.warning("Garbage Collection didn't run, Heap, Free: " + heapFreeSize + " Max: " + heapMaxSize);
+                r.repType = Request.ReplyType.DELETE_FAIL;
+            } else {
+                log.warning("Cleared data store, Heap, Free: " + heapFreeSize + " Max: " + heapMaxSize);
+                r.repType = Request.ReplyType.OP_SUCCESS;
+            }
+            cache.put(r.getUID(), r);
         }
     }
 
