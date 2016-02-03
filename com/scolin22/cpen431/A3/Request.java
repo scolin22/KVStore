@@ -18,8 +18,8 @@ public class Request {
     final static int COMMAND_LENGTH = 1;
     final static int VAL_LEN_LENGTH = 2;
     private static Logger log = Logger.getLogger(Request.class.getName());
-    RequestType reqType;
-    ReplyType repType;
+    RequestType reqType = RequestType.INVALID_REQ_CODE;
+    ReplyType repType = ReplyType.INVALID_REP_CODE;
     byte[] UID = new byte[UNIQUE_ID_LENGTH];
     short length = 0;
     byte[] value;
