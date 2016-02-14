@@ -25,7 +25,7 @@ public class WorkerRunnable implements Runnable {
 
     @Override
     public void run() {
-        if (r.repType == null) {
+        if (r.repType == Request.ReplyType.INVALID_REP_CODE) {
             switch (r.reqType) {
                 case PUT:
                     ds.put(r);
