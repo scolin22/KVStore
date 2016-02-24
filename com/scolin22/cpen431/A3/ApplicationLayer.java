@@ -18,7 +18,7 @@ public class ApplicationLayer {
         try {
             this.server = server;
             socket = new DatagramSocket(port);
-            log.info("Version: Using the getIfPresent instead of get for Cache.");
+            log.info("Version: Fixed bug with setting default reply codes.");
             log.info("Socket running on: " + socket.getLocalAddress() + ", port: " + socket.getLocalPort());
         } catch (SocketException e) {
             e.printStackTrace();
